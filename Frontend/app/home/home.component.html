@@ -1,0 +1,68 @@
+
+<h4 *ngIf=!isAdmin>Hello User!!</h4>
+<div class="container" *ngIf=isAdmin>
+    <div class="row">
+      <div class="col-12">
+        <h3>Create User</h3>
+          <form [formGroup]="createUserForm" class="mt-5">
+              <div class="form-group">
+                  <label for="name" class="login-text">Name:</label>
+                  <input type="name" class="form-control" placeholder="Enter Name" formControlName="name"
+                    (keyup)="clearError()" required />
+                  <div *ngIf="
+                      createUserForm.controls['name'].invalid && createUserForm.controls['name'].touched && createUserForm.controls['name'].errors.required
+                    " class="alert alert-danger">
+                    Name is required
+                  </div>
+                </div>
+              <div class="form-group">
+                <label for="email" class="login-text">Email:</label>
+                <input type="email" class="form-control" placeholder="Enter email" formControlName="email"
+                  (keyup)="clearError()" required />
+                <div *ngIf="
+                    createUserForm.controls['email'].invalid && createUserForm.controls['email'].touched && createUserForm.controls['email'].errors.required
+                  " class="alert alert-danger">
+                  Email is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pwd" class="login-text">Password:</label>
+                <input type="password" class="form-control" formControlName="password" (keyup)="clearError()"
+                  placeholder="Enter password" name="pwd" />
+                <div *ngIf="createUserForm.controls['password'].invalid && createUserForm.controls['password'].touched"
+                  class="alert alert-danger">
+                  <div *ngIf="createUserForm.controls['password'].errors.required">Password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="confirmpwd" class="login-text">Confirm Password:</label>
+                  <input type="password" class="form-control" formControlName="confirmpassword" (keyup)="clearError()"
+                    placeholder="Enter password" name="confirmpwd" />
+                  <div *ngIf="createUserForm.controls['confirmpassword'].invalid && createUserForm.controls['confirmpassword'].touched"
+                    class="alert alert-danger">
+                    <div *ngIf="createUserForm.controls['confirmpassword'].errors.required">Confirm Password is required</div>
+                  </div>
+              </div>
+              <div class="form-group" *ngIf=showRole>
+                  <label for="role" class="login-text">Role:</label>
+                  <select formControlName="role">
+                    <option value="admin">Admin</option>
+                    <option value ="user">User</option>
+                  </select>
+              </div>
+              <div class="errorMessage" [class.hide]="!showErrorMessage">
+                {{ errorMessage }}
+              </div>
+              <div class="form-group position-relative">
+                <button type="submit" class="btn btn-danger btn-block btn-lg btn-login-size" (click)="createUser()">
+                  Create User
+                </button>
+  
+              </div>
+            </form>
+      </div>
+    </div>
+  
+  </div>
+  
+  
